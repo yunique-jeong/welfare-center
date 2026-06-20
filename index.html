@@ -4,19 +4,32 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  <!-- 실기기가 모바일이면 전용 모바일 페이지(mobile.html)로 이동 — ?pc=1 로 PC 고정 -->
+  <script>
+    (function () {
+      try {
+        if (/[?&]pc\b/.test(location.search)) { sessionStorage.setItem('sw_pc', '1'); }
+        var stay = sessionStorage.getItem('sw_pc') === '1';
+        var isPhone = window.matchMedia('(max-width: 767px)').matches
+          || /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        if (isPhone && !stay) { location.replace('mobile.html'); }
+      } catch (e) {}
+    })();
+  </script>
+
   <!-- ===== SEO: 기본 메타태그 ===== -->
   <title>사랑복지센터 | 서울 서대문구 · 인천 서구 방문요양 · 재가복지 전문</title>
   <meta name="description" content="서울 서대문구와 인천 서구 일대의 사랑복지센터. 6명의 요양보호사가 가족처럼 어르신을 모시는 재가복지 전문 센터. 방문요양·방문목욕·재가복지. 전화상담 02-302-2814" />
   <meta name="keywords" content="사랑복지센터, 서대문구 요양, 인천 서구 요양, 홍은동 요양, 방문요양, 재가복지, 노인요양, 서울 요양센터, 인천 재가복지, 방문목욕, 요양보호사" />
   <meta name="author" content="사랑복지센터" />
   <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://sarang-welfare.kr/" />
+  <link rel="canonical" href="https://sarangwelfare.co.kr/" />
 
   <!-- ===== SEO: Open Graph (SNS 공유) ===== -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="사랑복지센터 | 서울 서대문구 · 인천 서구 방문요양 · 재가복지" />
   <meta property="og:description" content="6명의 요양보호사가 가족처럼 어르신을 모시는 재가복지 전문 센터. 서울 서대문구·인천 서구. 02-302-2814" />
-  <meta property="og:url" content="https://sarang-welfare.kr/" />
+  <meta property="og:url" content="https://sarangwelfare.co.kr/" />
   <meta property="og:site_name" content="사랑복지센터" />
   <meta property="og:locale" content="ko_KR" />
 
@@ -34,7 +47,7 @@
     "name": "사랑복지센터",
     "alternateName": "사랑 재가복지센터",
     "description": "서울 서대문구와 인천 서구 일대에서 운영하는, 요양보호사 6명이 가족처럼 어르신을 모시는 방문요양·방문목욕·재가복지 전문 센터",
-    "url": "https://sarang-welfare.kr/",
+    "url": "https://sarangwelfare.co.kr/",
     "telephone": "02-302-2814",
     "address": {
       "@type": "PostalAddress",
