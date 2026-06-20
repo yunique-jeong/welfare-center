@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>사랑복지센터 · 모바일</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* =========================================================
+     Ant Design Mobile (antd-mobile) design language
+     Tokens mirror antd-mobile v5 CSS variables
+     ========================================================= */
+  :root {
+    --adm-color-primary: #dd7a40;
+    --adm-color-primary-active: #bd5e26;
+    --adm-color-primary-light: #fbeee3;
+    --adm-color-success: #7e9152;
+    --adm-color-warning: #e0962a;
+    --adm-color-danger: #d9543f;
+
+    --adm-color-text: #2b2620;
+    --adm-color-text-secondary: #6b6258;
+    --adm-color-weak: #9a8f82;
+    --adm-color-light: #c9bdaf;
+    --adm-color-border: #efe7dc;
+    --adm-color-border-2: #e0d5c6;
+
+    --adm-color-white: #fffdfb;
+    --adm-color-box: #f5efe7;       /* warm page background */
+    --adm-color-fill-content: #f5efe7;
+
+    --radius-s: 4px;
+    --radius-m: 8px;
+    --radius-l: 12px;
+
+    --gutter: 12px;                  /* consistent page side margin */
+    --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans KR',
+            Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+    --navbar-h: 46px;
+    --tabbar-h: 54px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    font-family: var(--font);
+    background: var(--adm-color-box);
+    color: var(--adm-color-text);
+    font-size: 15px;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    padding-bottom: calc(var(--tabbar-h) + env(safe-area-inset-bottom, 0px));
+  }
+  img { max-width: 100%; display: block; }
+  a { text-decoration: none; color: inherit; }
+  button { font-family: inherit; cursor: pointer; border: none; background: none; }
+  ul { list-style: none; }
+
+  /* ===== NavBar (antd-mobile NavBar) ===== */
+  .adm-navbar {
+    position: sticky; top: 0; z-index: 100;
+    height: var(--navbar-h);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 12px;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: saturate(160%) blur(12px);
+    -webkit-backdrop-filter: saturate(160%) blur(12px);
+    border-bottom: 0.5px solid var(--adm-color-border-2);
+  }
+  .nav-brand { display: flex; align-items: center; gap: 8px; }
+  .nav-logo {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: var(--adm-color-primary);
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+  .nav-logo::after { content: ''; width: 9px; height: 9px; border-radius: 50%; background: #fff; }
+  .nav-title { font-size: 17px; font-weight: 700; color: var(--adm-color-text); letter-spacing: -0.02em; }
+  .nav-right { display: flex; align-items: center; gap: 6px; }
+  .nav-icon-btn {
+    width: 34px; height: 34px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--adm-color-text);
+  }
+  .nav-icon-btn:active { background: var(--adm-color-box); }
+
+  /* ===== NoticeBar (antd-mobile NoticeBar) ===== */
+  .adm-notice-bar {
+    display: flex; align-items: center; gap: 8px;
+    background: var(--adm-color-primary-light);
+    color: var(--adm-color-primary);
+    font-size: 13px; font-weight: 500;
+    padding: 9px 14px;
+    line-height: 1.4;
+  }
+  .adm-notice-bar svg { flex-shrink: 0; }
+  .adm-notice-bar b { font-weight: 700; }
+
+  /* ===== Layout: stacked white cards with equal gutter ===== */
+  .stack { padding: 12px 0 8px; }
+  .card {
+    background: var(--adm-color-white);
+    border-radius: var(--radius-l);
+    margin: 0 var(--gutter) 12px;
+    overflow: hidden;
+  }
+  .card-pad { padding: 16px; }
+
+  .block-title {
+    display: flex; align-items: baseline; justify-content: space-between;
+    padding: 4px 2px 12px;
+  }
+  .block-title h2 { font-size: 18px; font-weight: 700; letter-spacing: -0.02em; }
+  .block-title .sub { font-size: 12px; color: var(--adm-color-weak); }
+
+  .eyebrow {
+    display: inline-block;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.06em;
+    color: var(--adm-color-primary);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  /* ===== Hero card ===== */
+  .hero-img {
+    position: relative; width: 100%; aspect-ratio: 16/10; overflow: hidden;
+    background: #e8eef5;
+  }
+  .hero-img img { width: 100%; height: 100%; object-fit: cover; }
+  .hero-img .live {
+    position: absolute; top: 10px; left: 10px;
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(0,0,0,0.55); color: #fff;
+    font-size: 11px; font-weight: 600;
+    padding: 5px 10px; border-radius: 999px;
+    backdrop-filter: blur(4px);
+  }
+  .hero-img .live::before {
+    content: ''; width: 6px; height: 6px; border-radius: 50%;
+    background: #4ade80; box-shadow: 0 0 0 3px rgba(74,222,128,0.3);
+  }
+  .hero-body { padding: 16px; }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--adm-color-primary-light); color: var(--adm-color-primary);
+    font-size: 12px; font-weight: 600;
+    padding: 5px 11px; border-radius: 999px; margin-bottom: 12px;
+  }
+  .hero-tag .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--adm-color-primary); }
+  .hero-body h1 {
+    font-size: 25px; font-weight: 700; line-height: 1.32;
+    letter-spacing: -0.03em; margin-bottom: 10px;
+  }
+  .hero-body h1 em { font-style: normal; color: var(--adm-color-primary); }
+  .hero-body p { font-size: 14px; color: var(--adm-color-text-secondary); line-height: 1.65; margin-bottom: 16px; }
+  .hero-btns { display: flex; gap: 8px; }
+
+  /* ===== Buttons (antd-mobile Button) ===== */
+  .adm-btn {
+    flex: 1;
+    display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+    height: 44px; border-radius: var(--radius-m);
+    font-size: 15px; font-weight: 600;
+    transition: opacity 0.15s, background 0.15s;
+  }
+  .adm-btn:active { opacity: 0.82; }
+  .adm-btn-primary { background: var(--adm-color-primary); color: #fff; }
+  .adm-btn-primary:active { background: var(--adm-color-primary-active); opacity: 1; }
+  .adm-btn-default {
+    background: #fff; color: var(--adm-color-primary);
+    border: 1px solid var(--adm-color-primary);
+  }
+  .adm-btn-block { width: 100%; flex: none; }
+
+  /* ===== Grid quick actions (antd-mobile Grid) ===== */
+  .quick-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
+  .quick-cell {
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    padding: 16px 4px; text-align: center;
+  }
+  .quick-cell:active { background: var(--adm-color-box); }
+  .quick-ico {
+    width: 46px; height: 46px; border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--adm-color-primary-light); color: var(--adm-color-primary);
+  }
+  .quick-cell:nth-child(2) .quick-ico { background: #fbf0d8; color: #c08a1f; }
+  .quick-cell:nth-child(3) .quick-ico { background: #eef3e4; color: #6f8047; }
+  .quick-cell:nth-child(4) .quick-ico { background: #f6ece2; color: #b07b52; }
+  .quick-cell span { font-size: 12px; font-weight: 600; color: var(--adm-color-text); }
+
+  /* ===== Stats ===== */
+  .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--adm-color-border); }
+  .stat-cell { background: #fff; padding: 16px; }
+  .stat-cell .v { font-size: 22px; font-weight: 700; letter-spacing: -0.02em; }
+  .stat-cell .v em { font-style: normal; font-size: 13px; color: var(--adm-color-weak); margin-left: 2px; font-weight: 600; }
+  .stat-cell .v b { color: var(--adm-color-primary); }
+  .stat-cell .l { font-size: 12px; color: var(--adm-color-text-secondary); margin-top: 3px; line-height: 1.4; }
+
+  /* ===== List (antd-mobile List) ===== */
+  .adm-list-item {
+    display: grid; grid-template-columns: auto 1fr auto;
+    align-items: center; gap: 12px;
+    padding: 14px 16px;
+    position: relative;
+  }
+  .adm-list-item:not(:last-child)::after {
+    content: ''; position: absolute; left: 16px; right: 0; bottom: 0;
+    height: 0.5px; background: var(--adm-color-border-2);
+  }
+  .adm-list-item:active { background: var(--adm-color-box); }
+  .li-icon {
+    width: 42px; height: 42px; border-radius: 11px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--adm-color-primary-light); color: var(--adm-color-primary);
+  }
+  .adm-list-item:nth-child(2) .li-icon { background: #fbf0d8; color: #c08a1f; }
+  .adm-list-item:nth-child(3) .li-icon { background: #eef3e4; color: #6f8047; }
+  .adm-list-item:nth-child(4) .li-icon { background: #f6ece2; color: #b07b52; }
+  .adm-list-item:nth-child(5) .li-icon { background: #f7e9e2; color: #c2613f; }
+  .adm-list-item:nth-child(6) .li-icon { background: #fbeee3; color: #dd7a40; }
+  .li-body .t { font-size: 15px; font-weight: 600; color: var(--adm-color-text); }
+  .li-body .d {
+    font-size: 12.5px; color: var(--adm-color-text-secondary); margin-top: 2px; line-height: 1.5;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .li-arrow { color: var(--adm-color-light); font-size: 18px; }
+
+  /* ===== Founder story ===== */
+  .story-img { position: relative; width: 100%; aspect-ratio: 3/2; overflow: hidden; }
+  .story-img img { width: 100%; height: 100%; object-fit: cover; object-position: center 28%; }
+  .story-img::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 45%, rgba(0,0,0,0.55) 100%);
+  }
+  .story-sign {
+    position: absolute; left: 16px; bottom: 14px; z-index: 1; color: #fff;
+  }
+  .story-sign .role { font-size: 11px; opacity: 0.85; letter-spacing: 0.04em; }
+  .story-sign .name { font-size: 19px; font-weight: 700; letter-spacing: 0.02em; }
+  .story-sign .cred { font-size: 11.5px; opacity: 0.9; margin-top: 2px; }
+  .story-quote {
+    font-size: 16px; font-weight: 600; line-height: 1.6; letter-spacing: -0.02em;
+    padding: 16px 16px 12px; color: var(--adm-color-text);
+    border-left: 3px solid var(--adm-color-primary); margin: 16px 16px 0;
+    background: var(--adm-color-box); border-radius: 0 8px 8px 0;
+  }
+  .story-text { padding: 14px 16px 4px; }
+  .story-text p { font-size: 13.5px; color: var(--adm-color-text-secondary); line-height: 1.75; margin-bottom: 12px; }
+  .story-text strong { color: var(--adm-color-text); font-weight: 600; }
+  .story-chips { display: flex; flex-wrap: wrap; gap: 6px; padding: 4px 16px 16px; }
+  .chip {
+    font-size: 11.5px; font-weight: 600; color: var(--adm-color-text-secondary);
+    background: var(--adm-color-box); border: 0.5px solid var(--adm-color-border-2);
+    padding: 5px 10px; border-radius: 999px;
+  }
+
+  /* ===== About checklist ===== */
+  .check-item {
+    display: grid; grid-template-columns: auto 1fr; gap: 12px;
+    padding: 13px 16px; position: relative;
+  }
+  .check-item:not(:last-child)::after {
+    content: ''; position: absolute; left: 16px; right: 16px; bottom: 0;
+    height: 0.5px; background: var(--adm-color-border);
+  }
+  .check-mark {
+    width: 22px; height: 22px; border-radius: 50%;
+    background: var(--adm-color-primary); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; margin-top: 1px;
+  }
+  .check-item .ct { font-size: 13.5px; color: var(--adm-color-text-secondary); line-height: 1.6; }
+  .check-item .ct strong { color: var(--adm-color-text); font-weight: 600; }
+
+  /* ===== Tag (antd-mobile Tag) ===== */
+  .adm-tag {
+    display: inline-flex; align-items: center;
+    font-size: 11px; font-weight: 600; line-height: 1;
+    padding: 4px 8px; border-radius: var(--radius-s);
+  }
+  .adm-tag-primary { background: var(--adm-color-primary-light); color: var(--adm-color-primary); }
+  .adm-tag-success { background: #e7f8f0; color: #00935f; }
+  .adm-tag-default { background: var(--adm-color-box); color: var(--adm-color-text-secondary); }
+
+  /* ===== Reviews ===== */
+  .review {
+    padding: 16px; position: relative;
+  }
+  .review:not(:last-child)::after {
+    content: ''; position: absolute; left: 16px; right: 16px; bottom: 0;
+    height: 0.5px; background: var(--adm-color-border);
+  }
+  .review .stars { color: #ff8f1f; font-size: 13px; letter-spacing: 1px; margin-bottom: 8px; }
+  .review p { font-size: 13.5px; color: var(--adm-color-text); line-height: 1.7; margin-bottom: 12px; }
+  .review p mark { background: var(--adm-color-primary-light); color: var(--adm-color-primary); padding: 0 2px; border-radius: 2px; }
+  .review-meta { display: flex; justify-content: space-between; align-items: center; font-size: 11.5px; color: var(--adm-color-weak); }
+  .review-meta .who { font-weight: 600; color: var(--adm-color-text-secondary); }
+
+  /* ===== Notices ===== */
+  .notice {
+    display: flex; align-items: center; gap: 10px;
+    padding: 13px 16px; position: relative;
+  }
+  .notice:not(:last-child)::after {
+    content: ''; position: absolute; left: 16px; right: 16px; bottom: 0;
+    height: 0.5px; background: var(--adm-color-border);
+  }
+  .notice .nt { flex: 1; font-size: 14px; font-weight: 500; color: var(--adm-color-text); }
+  .notice .nd { font-size: 11.5px; color: var(--adm-color-weak); font-variant-numeric: tabular-nums; }
+
+  /* ===== Contact / Form (antd-mobile Form) ===== */
+  .info-row {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 14px 16px; position: relative;
+  }
+  .info-row:not(:last-child)::after {
+    content: ''; position: absolute; left: 16px; right: 16px; bottom: 0;
+    height: 0.5px; background: var(--adm-color-border);
+  }
+  .info-ico {
+    width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0;
+    background: var(--adm-color-box); color: var(--adm-color-primary);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .info-row .l { font-size: 11.5px; color: var(--adm-color-weak); letter-spacing: 0.03em; }
+  .info-row .v { font-size: 15px; font-weight: 600; color: var(--adm-color-text); margin-top: 1px; }
+  .info-row .v a { color: var(--adm-color-primary); }
+  .info-row .vs { font-size: 12.5px; color: var(--adm-color-text-secondary); font-weight: 400; line-height: 1.55; margin-top: 2px; }
+
+  .form-field { padding: 0 16px; }
+  .form-field label { display: block; font-size: 13px; font-weight: 600; color: var(--adm-color-text); padding: 14px 0 8px; }
+  .form-field label .req { color: var(--adm-color-danger); margin-left: 2px; }
+  .adm-input, .adm-textarea, .adm-select {
+    width: 100%; padding: 12px 14px;
+    background: var(--adm-color-box);
+    border: 1px solid transparent; border-radius: var(--radius-m);
+    font-family: inherit; font-size: 16px; color: var(--adm-color-text);
+    outline: none; transition: border-color 0.15s, background 0.15s;
+  }
+  .adm-input::placeholder, .adm-textarea::placeholder { color: var(--adm-color-light); }
+  .adm-input:focus, .adm-textarea:focus, .adm-select:focus {
+    border-color: var(--adm-color-primary); background: #fff;
+  }
+  .adm-textarea { height: 92px; resize: none; line-height: 1.6; }
+  .form-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .form-consent { display: flex; align-items: flex-start; gap: 8px; padding: 14px 16px 4px; font-size: 12px; color: var(--adm-color-text-secondary); }
+  .form-consent input { width: 16px; height: 16px; accent-color: var(--adm-color-primary); margin-top: 2px; }
+  .form-submit { padding: 12px 16px 18px; }
+
+  .kakao-cell {
+    display: flex; align-items: center; gap: 12px;
+    padding: 14px 16px; background: #fff8d6;
+  }
+  .kakao-cell:active { background: #fef0a8; }
+  .kakao-cell .ki { width: 36px; height: 36px; border-radius: 10px; background: #fee500; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+  .kakao-cell .kt b { display: block; font-size: 14px; font-weight: 700; color: #3a2e00; }
+  .kakao-cell .kt span { font-size: 12px; color: #7a6300; }
+
+  /* ===== Map ===== */
+  .map-cell iframe { width: 100%; height: 240px; border: none; display: block; }
+
+  /* ===== Footer ===== */
+  .footer { padding: 24px var(--gutter) 12px; text-align: center; }
+  .footer .fname { font-size: 16px; font-weight: 700; }
+  .footer .ftag { font-size: 12.5px; color: var(--adm-color-text-secondary); margin: 6px 0 14px; line-height: 1.6; }
+  .footer .fnap { font-size: 11.5px; color: var(--adm-color-weak); line-height: 1.8; }
+  .footer .fcopy { font-size: 11px; color: var(--adm-color-light); margin-top: 14px; }
+
+  /* ===== TabBar (antd-mobile TabBar) ===== */
+  .adm-tabbar {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 100;
+    height: calc(var(--tabbar-h) + env(safe-area-inset-bottom, 0px));
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    background: rgba(255,255,255,0.94);
+    backdrop-filter: saturate(160%) blur(12px);
+    -webkit-backdrop-filter: saturate(160%) blur(12px);
+    border-top: 0.5px solid var(--adm-color-border-2);
+  }
+  .tab {
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;
+    color: var(--adm-color-weak); font-size: 11px; font-weight: 500;
+  }
+  .tab.active { color: var(--adm-color-primary); }
+  .tab.call { color: #fff; }
+  .tab.call .tab-ico {
+    background: var(--adm-color-primary); color: #fff;
+    width: 30px; height: 30px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .tab.call span { color: var(--adm-color-primary); font-weight: 600; }
+
+  /* ===== Toast ===== */
+  #toast {
+    position: fixed; left: 50%; bottom: calc(var(--tabbar-h) + 24px);
+    transform: translateX(-50%) translateY(10px);
+    background: rgba(0,0,0,0.8); color: #fff;
+    font-size: 13px; padding: 10px 18px; border-radius: 999px;
+    opacity: 0; pointer-events: none; transition: all 0.25s; z-index: 300;
+  }
+  #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- ===== NavBar ===== -->
+<div class="adm-navbar">
+  <div class="nav-brand">
+    <div class="nav-logo"></div>
+    <div class="nav-title">사랑복지센터</div>
+  </div>
+  <div class="nav-right">
+    <a class="nav-icon-btn" href="tel:02-302-2814" aria-label="전화">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+    </a>
+    <button class="nav-icon-btn" onclick="showToast('메뉴는 아래 탭바를 이용해 주세요')" aria-label="메뉴">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </div>
+</div>
+
+<!-- ===== NoticeBar ===== -->
+<div class="adm-notice-bar">
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>
+  <div>상담 <b>02-302-2814</b> · 평일 09:00–18:00 · 무료 방문 상담 가능</div>
+</div>
+
+<div class="stack">
+
+  <!-- ===== Hero ===== -->
+  <section class="card" id="home">
+    <div class="hero-img">
+      <img src="assets/hero-photo.jpg" alt="어르신과 보호자가 손을 맞잡은 모습" />
+      <span class="live">지금 상담 가능</span>
+    </div>
+    <div class="hero-body">
+      <span class="hero-tag"><span class="dot"></span>서울 서대문구 · 인천 서구</span>
+      <h1>가족처럼 곁에 머무는<br /><em>따뜻한 돌봄</em></h1>
+      <p>6명의 요양보호사가 한 가족처럼 모여, 어르신 한 분 한 분을 정성껏 모시는 재가복지 센터입니다.</p>
+      <div class="hero-btns">
+        <a href="#contact" class="adm-btn adm-btn-primary">무료 상담 신청</a>
+        <a href="tel:02-302-2814" class="adm-btn adm-btn-default">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          전화 상담
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Quick actions ===== -->
+  <section class="card">
+    <div class="quick-grid">
+      <a class="quick-cell" href="tel:02-302-2814">
+        <span class="quick-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
+        <span>전화 상담</span>
+      </a>
+      <button class="quick-cell" onclick="openKakao()">
+        <span class="quick-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
+        <span>카카오톡</span>
+      </button>
+      <a class="quick-cell" href="#map">
+        <span class="quick-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+        <span>오시는 길</span>
+      </a>
+      <a class="quick-cell" href="#services">
+        <span class="quick-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></span>
+        <span>서비스</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ===== Stats ===== -->
+  <section class="card">
+    <div class="stat-grid">
+      <div class="stat-cell"><div class="v">6<em>명</em></div><div class="l">한 가족 같은 요양보호사</div></div>
+      <div class="stat-cell"><div class="v"><b>자격</b><em>보유</em></div><div class="l">국가 자격 요양보호사 전원</div></div>
+      <div class="stat-cell"><div class="v">365<em>일</em></div><div class="l">언제든 상담 가능</div></div>
+      <div class="stat-cell"><div class="v">2<em>개 권역</em></div><div class="l">서대문구 · 인천 서구</div></div>
+    </div>
+  </section>
+
+  <!-- ===== Services ===== -->
+  <section id="services">
+    <div class="card-pad" style="padding-bottom:8px;">
+      <div class="block-title" style="padding-bottom:0;">
+        <h2>서비스 안내</h2>
+        <span class="sub">장기요양 급여 적용</span>
+      </div>
+    </div>
+    <div class="card" style="margin-top:0;">
+      <a class="adm-list-item" href="#contact">
+        <span class="li-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 3l9 6.5V20a2 2 0 0 1-2 2h-4v-7h-6v7H5a2 2 0 0 1-2-2V9.5z"/></svg></span>
+        <div class="li-body"><div class="t">방문요양</div><div class="d">익숙한 집에서 가장 편안하게. 요양보호사가 직접 댁으로 찾아가 어르신의 하루를 도와드립니다.</div></div>
+        <span class="li-arrow">›</span>
+      </a>
+      <a class="adm-list-item" href="#contact">
+        <span class="li-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/><path d="M3 10h18v6a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4v-6z"/></svg></span>
+        <div class="li-body"><div class="t">방문목욕</div><div class="d">전용 목욕차량과 두 명의 보호사가 함께, 거동이 어려우셔도 안전하고 정성껏 모십니다.</div></div>
+        <span class="li-arrow">›</span>
+      </a>
+      <a class="adm-list-item" href="#contact">
+        <span class="li-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v6M12 22v-6M4.9 4.9l4.2 4.2M14.8 14.8l4.2 4.2"/><circle cx="12" cy="12" r="3"/></svg></span>
+        <div class="li-body"><div class="t">방문간호</div><div class="d">간호사가 직접 찾아가 혈압·혈당 체크부터 투약 관리, 상처 처치까지 살펴드립니다.</div></div>
+        <span class="li-arrow">›</span>
+      </a>
+      <a class="adm-list-item" href="#contact">
+        <span class="li-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="4"/><path d="M2 21c0-3.9 3.1-7 7-7s7 3.1 7 7"/><circle cx="17" cy="9" r="3"/><path d="M22 19c0-2.8-2.2-5-5-5"/></svg></span>
+        <div class="li-body"><div class="t">일상생활 지원</div><div class="d">장보기, 병원 동행, 청소, 빨래 — 자식이 곁에 있다면 해드렸을 작은 일들을 함께합니다.</div></div>
+        <span class="li-arrow">›</span>
+      </a>
+      <a class="adm-list-item" href="#contact">
+        <span class="li-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></span>
+        <div class="li-body"><div class="t">정서 지원</div><div class="d">말벗이 되어드리고, 좋아하시는 활동을 함께하며 인지훈련도 자연스럽게 챙겨드립니다.</div></div>
+        <span class="li-arrow">›</span>
+      </a>
+      <a class="adm-list-item" href="#contact">
+        <span class="li-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13l2 2 4-4"/></svg></span>
+        <div class="li-body"><div class="t">장기요양 등급 신청</div><div class="d">신청부터 등급 판정, 급여 이용까지 한 단계씩 가족처럼 알려드립니다.</div></div>
+        <span class="li-arrow">›</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ===== Founder story ===== -->
+  <section class="card" id="story">
+    <div class="story-img">
+      <img src="assets/founder.jpg" alt="사랑복지센터 센터장" />
+      <div class="story-sign">
+        <div class="role">센터장</div>
+        <div class="name">정 희 근</div>
+        <div class="cred">요양보호사 1급 · 사회복지사 2급</div>
+      </div>
+    </div>
+    <div class="card-pad" style="padding-bottom:0;">
+      <span class="eyebrow">센터장 이야기</span>
+    </div>
+    <blockquote class="story-quote">"처음엔 그저 우리 어머니를 잘 모시고 싶다는 마음 하나였어요. 그 마음이 이웃 어르신들께도 닿을 수 있다면, 그게 가장 따뜻한 일이라 생각했습니다."</blockquote>
+    <div class="story-text">
+      <p>2019년, 어머니께서 사고로 한순간에 거동이 어려워지셨습니다. 어머니를 가장 편안한 집에서 제 손으로 직접 모시기로 결심하고, 요양보호사 자격증과 사회복지사 공부를 마쳤습니다.</p>
+      <p>그렇게 사랑복지센터의 문을 열었습니다. 지금까지 저희는 어르신을 <strong>"내 부모님"</strong>이라 부르며 모십니다. 가장 익숙한 집에서 평안한 하루를 보내시도록 — 변하지 않는 약속입니다.</p>
+    </div>
+    <div class="story-chips">
+      <span class="chip">요양보호사 1급</span>
+      <span class="chip">사회복지사 2급</span>
+      <span class="chip">10년+ 현장 경력</span>
+    </div>
+  </section>
+
+  <!-- ===== About ===== -->
+  <section id="about">
+    <div class="card-pad" style="padding-bottom:8px;">
+      <span class="eyebrow">센터 소개</span>
+      <div class="block-title" style="padding:0;"><h2>한 가족처럼 모십니다</h2></div>
+    </div>
+    <div class="card" style="margin-top:0;">
+      <div class="check-item"><div class="check-mark">✓</div><div class="ct"><strong>요양보호사 식구들</strong> — 얼굴과 이름을 아는 작고 따뜻한 팀입니다.</div></div>
+      <div class="check-item"><div class="check-mark">✓</div><div class="ct"><strong>전문 요양보호사 상주</strong> — 국가 자격증 보유 전문 인력이 직접 서비스를 제공합니다.</div></div>
+      <div class="check-item"><div class="check-mark">✓</div><div class="ct"><strong>두 권역 밀착 서비스</strong> — 서울 서대문구와 인천 서구 전역 방문이 가능합니다.</div></div>
+      <div class="check-item"><div class="check-mark">✓</div><div class="ct"><strong>장기요양 급여 적용</strong> — 건강보험공단 급여로 가족의 부담을 낮춰드립니다.</div></div>
+      <div class="check-item"><div class="check-mark">✓</div><div class="ct"><strong>365일 상담 · 무료 방문 상담</strong> — 직접 가정을 방문해 알맞은 서비스를 제안합니다.</div></div>
+    </div>
+  </section>
+
+  <!-- ===== Reviews ===== -->
+  <section id="reviews">
+    <div class="card-pad" style="padding-bottom:8px;">
+      <div class="block-title" style="padding-bottom:0;">
+        <h2>이용 후기</h2>
+        <span class="sub">실버케어코리아 등록</span>
+      </div>
+    </div>
+    <div class="card" style="margin-top:0;">
+      <article class="review">
+        <div class="stars">★★★★★</div>
+        <p><mark>서대문·관악·인천 서구</mark> 어르신들을 케어하고 있고, 요양보호사도 채용해 근무하고 있습니다. 신청부터 등급판정, 서비스계약, 비용까지 모든 과정을 안내해 드립니다.</p>
+        <div class="review-meta"><span class="who">yLjExM** 보호자님</span><span>2025.03.11</span></div>
+      </article>
+      <article class="review">
+        <div class="stars">★★★★★</div>
+        <p><mark>친절하게 수급자 신청부터 등급판정, 서비스 내용과 비용을 안내</mark>해 주셔서 감사했어요! 4차선 대로변이라 찾아가기도 수월합니다.</p>
+        <div class="review-meta"><span class="who">xLjIwM** 보호자님</span><span>2025.02.25</span></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===== Notices ===== -->
+  <section id="notices">
+    <div class="card-pad" style="padding-bottom:8px;">
+      <div class="block-title" style="padding-bottom:0;"><h2>센터 소식</h2><span class="sub">공지사항</span></div>
+    </div>
+    <div class="card" style="margin-top:0;">
+      <div class="notice"><span class="adm-tag adm-tag-primary">공지</span><span class="nt">2026년 장기요양 급여 수가 변경 안내</span><span class="nd">04.15</span></div>
+      <div class="notice"><span class="adm-tag adm-tag-default">소식</span><span class="nt">봄철 어르신 건강관리 캠페인 안내</span><span class="nd">03.28</span></div>
+      <div class="notice"><span class="adm-tag adm-tag-primary">공지</span><span class="nt">신규 요양보호사 채용 공고</span><span class="nd">03.10</span></div>
+      <div class="notice"><span class="adm-tag adm-tag-default">소식</span><span class="nt">설 명절 연휴 운영 안내</span><span class="nd">01.20</span></div>
+    </div>
+  </section>
+
+  <!-- ===== Contact ===== -->
+  <section id="contact">
+    <div class="card-pad" style="padding-bottom:8px;">
+      <span class="eyebrow">상담 문의</span>
+      <div class="block-title" style="padding:0;"><h2>언제든 편하게 연락 주세요</h2></div>
+    </div>
+
+    <div class="card" style="margin-top:0;">
+      <div class="info-row">
+        <span class="info-ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
+        <div><div class="l">전화 상담</div><div class="v"><a href="tel:02-302-2814">02-302-2814</a></div></div>
+      </div>
+      <div class="info-row">
+        <span class="info-ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+        <div><div class="l">주소</div><div class="v" style="font-size:14px;">서울특별시 서대문구 모래내로 323</div></div>
+      </div>
+      <div class="info-row">
+        <span class="info-ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+        <div><div class="l">운영 시간</div><div class="v" style="font-size:14px;">평일 09:00 ~ 18:00</div><div class="vs">주말·공휴일 휴무 (전화 상담 가능)</div></div>
+      </div>
+      <div class="kakao-cell" onclick="openKakao()">
+        <span class="ki">💬</span>
+        <div class="kt"><b>카카오톡으로 상담하기</b><span>빠르고 편리한 채팅 상담</span></div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:0;">
+      <div class="card-pad" style="padding-bottom:0;">
+        <div class="block-title" style="padding:0 0 4px;"><h2 style="font-size:16px;">온라인 상담 신청</h2></div>
+        <p style="font-size:12.5px;color:var(--adm-color-text-secondary);">간단한 정보만 남겨주시면 평일 1시간 이내 회신드립니다.</p>
+      </div>
+      <form onsubmit="submitForm(event)">
+        <div class="form-2" style="padding:0 16px;">
+          <div class="form-field" style="padding:0;">
+            <label>성함<span class="req">*</span></label>
+            <input class="adm-input" type="text" placeholder="홍길동" required />
+          </div>
+          <div class="form-field" style="padding:0;">
+            <label>연락처<span class="req">*</span></label>
+            <input class="adm-input" type="tel" placeholder="010-0000-0000" required />
+          </div>
+        </div>
+        <div class="form-field">
+          <label>관심 서비스</label>
+          <select class="adm-select">
+            <option>방문요양</option>
+            <option>방문목욕</option>
+            <option>방문간호</option>
+            <option>장기요양 등급 신청</option>
+            <option>기타 / 잘 모르겠어요</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label>문의 내용</label>
+          <textarea class="adm-textarea" placeholder="어르신 상태나 궁금하신 점을 편하게 적어주세요."></textarea>
+        </div>
+        <label class="form-consent"><input type="checkbox" required /><span>개인정보 수집·이용에 동의합니다. (상담 목적으로만 사용됩니다)</span></label>
+        <div class="form-submit"><button type="submit" class="adm-btn adm-btn-primary adm-btn-block">상담 신청하기</button></div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ===== Map ===== -->
+  <section class="card map-cell" id="map">
+    <div class="card-pad" style="padding-bottom:10px;">
+      <div class="block-title" style="padding:0;"><h2 style="font-size:16px;">오시는 길</h2><span class="sub">모래내로 323</span></div>
+    </div>
+    <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=126.926%2C37.586%2C126.952%2C37.600&layer=mapnik&marker=37.593%2C126.939" title="사랑복지센터 위치" loading="lazy"></iframe>
+  </section>
+
+  <!-- ===== Footer ===== -->
+  <footer class="footer">
+    <div class="fname">사랑복지센터</div>
+    <div class="ftag">서울 서대문구 · 인천 서구 방문요양 · 재가복지</div>
+    <div class="fnap">서울특별시 서대문구 모래내로 323<br />대표전화 02-302-2814 · 평일 09:00~18:00</div>
+    <div class="fcopy">© 2026 사랑복지센터. All rights reserved.</div>
+  </footer>
+</div>
+
+<!-- ===== TabBar ===== -->
+<nav class="adm-tabbar">
+  <a class="tab active" href="#home">
+    <span class="tab-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1V9.5z"/></svg></span>
+    <span>홈</span>
+  </a>
+  <a class="tab" href="#services">
+    <span class="tab-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></span>
+    <span>서비스</span>
+  </a>
+  <a class="tab call" href="tel:02-302-2814">
+    <span class="tab-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
+    <span>전화</span>
+  </a>
+  <a class="tab" href="#contact">
+    <span class="tab-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
+    <span>상담</span>
+  </a>
+</nav>
+
+<div id="toast"></div>
+
+<script>
+  let toastTimer;
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg; t.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
+  }
+  function openKakao() { showToast('카카오톡 채널 상담을 준비 중입니다'); }
+  function submitForm(e) { e.preventDefault(); e.target.reset(); showToast('상담 신청이 접수되었습니다. 곧 연락드릴게요!'); }
+
+  // TabBar active state on scroll
+  const sections = ['home','services','contact'];
+  const tabs = document.querySelectorAll('.adm-tabbar .tab');
+  const tabMap = { home: 0, services: 1, contact: 3 };
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(en => {
+      if (en.isIntersecting) {
+        const id = en.target.id;
+        if (tabMap[id] !== undefined) {
+          tabs.forEach(t => t.classList.remove('active'));
+          tabs[tabMap[id]].classList.add('active');
+        }
+      }
+    });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  sections.forEach(id => { const el = document.getElementById(id); if (el) obs.observe(el); });
+</script>
+</body>
+</html>
